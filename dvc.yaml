@@ -14,3 +14,25 @@ stages:
     outs:
     - data/processed/X.csv
     - data/processed/y.csv
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+    - data/processed/X.csv
+    - data/processed/y.csv
+    - src/feature_engineering.py
+    outs:
+    - data/processed/X_test.csv
+    - data/processed/X_train.csv
+    - data/processed/y_test.csv
+    - data/processed/y_train.csv
+  train_model:
+    cmd: python src/model_training.py
+    deps:
+    - data/processed/X_train.csv
+    - data/processed/y_train.csv
+    - src/model_training.py
+    outs:
+    - models/model.pkl
+    metrics:
+    - metrics.json:
+        cache: false

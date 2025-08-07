@@ -16,3 +16,79 @@ stages:
       hash: md5
       md5: e1bdb3ec83b5c4fd3e7cb67d3ac77494
       size: 126726
+  preprocess:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - path: data/Breast_cancer_dataset.csv
+      hash: md5
+      md5: 6165d90b8708bb1c1dd14245cc6bef46
+      size: 125204
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 240dd3ab385a194c8ea0d7e1b7460feb
+      size: 956
+    outs:
+    - path: data/processed/X.csv
+      hash: md5
+      md5: 2e2c3cbf99da8741033791fa450352bf
+      size: 120780
+    - path: data/processed/y.csv
+      hash: md5
+      md5: 30ab93940d438bda5eb5a79d71a6bb17
+      size: 1718
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+    - path: data/processed/X.csv
+      hash: md5
+      md5: 2e2c3cbf99da8741033791fa450352bf
+      size: 120780
+    - path: data/processed/y.csv
+      hash: md5
+      md5: 30ab93940d438bda5eb5a79d71a6bb17
+      size: 1718
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: 9c650f14d0217c9a0b2776d81ff5cd59
+      size: 1444
+    outs:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 76bbe60f2da5ca7315f4203e6326daed
+      size: 67680
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 16b43c475ba8f253c3fc799e9e31d103
+      size: 270153
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: c1e4bc8a495a8d870db3624c79cf4bca
+      size: 345
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 871629b23676c98886844ae02acc75ed
+      size: 1368
+  train_model:
+    cmd: python src/model_training.py
+    deps:
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 16b43c475ba8f253c3fc799e9e31d103
+      size: 270153
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 871629b23676c98886844ae02acc75ed
+      size: 1368
+    - path: src/model_training.py
+      hash: md5
+      md5: 86ef0e8f91e95069fc61b011ff569ca6
+      size: 1048
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: f65760177bf72f67798a963a1d40fde0
+      size: 32
+    - path: models/model.pkl
+      hash: md5
+      md5: 89c48c628763f5a09f10e8e14ea6d8ef
+      size: 1175
