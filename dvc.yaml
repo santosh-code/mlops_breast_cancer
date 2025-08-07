@@ -28,11 +28,11 @@ stages:
   train_model:
     cmd: python src/model_training.py
     deps:
+    - data/processed/X_test.csv
     - data/processed/X_train.csv
+    - data/processed/y_test.csv
     - data/processed/y_train.csv
     - src/model_training.py
     outs:
-    - models/model.pkl
-    metrics:
-    - metrics.json:
-        cache: false
+    - metrics/metrics.txt
+    - models/svm_model.pkl

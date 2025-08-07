@@ -1,0 +1,8 @@
+model:
+  kernel: 'rbf'
+  C: 1.0
+  gamma: 'scale'
+  probability: True
+
+data:
+  random_state: 42
