@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  ingest:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: data/Breast_cancer_dataset.csv
+      hash: md5
+      md5: 6165d90b8708bb1c1dd14245cc6bef46
+      size: 125204
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 5b54289e6d37e8d31ada386da5c4d976
+      size: 555
+    outs:
+    - path: data/interim/cleaned.csv
+      hash: md5
+      md5: e1bdb3ec83b5c4fd3e7cb67d3ac77494
+      size: 126726
