@@ -6,3 +6,11 @@ stages:
     - src/data_ingestion.py
     outs:
     - data/interim/cleaned.csv
+  preprocess:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - data/Breast_cancer_dataset.csv
+    - src/data_preprocessing.py
+    outs:
+    - data/processed/X.csv
+    - data/processed/y.csv
